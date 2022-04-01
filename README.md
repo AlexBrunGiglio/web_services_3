@@ -29,10 +29,10 @@ Puis faites de même dans le dossier `movies`
 
 ### Lancement du projet 
 ```bash
-  $ cd front/
+  $ cd auth/
   $ npm run start
 
-  $ cd back/
+  $ cd movies/
   $ npm run start
 ```
 
