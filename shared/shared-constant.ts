@@ -5,7 +5,8 @@ export enum RolesList {
 
 export enum AppTypes {
     Gender = "Gender",
-    PresenceStatut = "PresenceStatut"
+    PresenceStatut = "PresenceStatut",
+    FileCategoryCode = "FileCategory"
 }
 
 export enum Gender {
@@ -23,3 +24,7 @@ export enum AppResponseCode {
     ExpiredToken = 4031,
 }
 export const refreshTokenLsKey = 'template_refresh_token';
+
+export enum FileCategory {
+    MainPhoto = "FileCategory_MainPhoto",
+}

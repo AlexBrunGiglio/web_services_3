@@ -1,10 +1,12 @@
 import { Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { Request } from "express";
+import { JwtPayload } from '../../../shared/jwt-payload';
 import { refreshTokenLsKey, RolesList } from "../../../shared/shared-constant";
 import { AppError, AppErrorWithMessage } from "../base/app-error";
 import { GenericResponse } from "../base/generic-response";
 import { MainHelpers } from "../base/main-helper";
+import { Environment } from '../environment/environment';
 import { MailsService } from '../modules/mails/mails.service';
 import { UserRoleService } from '../modules/users-roles/user-roles.service';
 import { GetUserResponse, UserDto } from "../modules/users/user-dto";
@@ -70,7 +72,7 @@ export class AuthService {
                 throw new AppErrorWithMessage(sendMailResponse.message);
             if (sendMailResponse)
                 response = createUserResponse;
-            response.token = AuthToolsService.createUserToken(this.jwtService, createUserResponse.user);
+            response.token = this.generateAccesToken(createUserResponse.user);
         }
         catch (err) {
             response.handleError(err);
@@ -83,7 +85,7 @@ export class AuthService {
         try {
             if (!loginViewModel.password || !loginViewModel.username)
                 throw AppError.getBadRequestError();
-            const findUserResponse = await this.userService.findOne({ where: { mail: loginViewModel.username } }, true);
+            const findUserResponse = await this.userService.findOne({ where: { username: loginViewModel.username } }, true);
             if (!findUserResponse.success)
                 throw new AppError(findUserResponse.error);
 
@@ -97,7 +99,8 @@ export class AuthService {
             if (findUserResponse.user.disabled) {
                 throw new AppErrorWithMessage('Votre compte a été archivé. Contacter un administrateur.', 403);
             }
-            response.token = AuthToolsService.createUserToken(this.jwtService, findUserResponse.user);
+            response.token = this.generateAccesToken(findUserResponse.user);
+            response.refreshToken = this.generateRefreshToken(findUserResponse.user);
             response.success = true;
         }
         catch (err) {
@@ -153,5 +156,54 @@ export class AuthService {
         }
         return response;
     }
+
+    generateAccesToken(user: UserDto) {
+        if (!user)
+            return null;
+        let roles: string[] = [];
+        if (user.roles)
+            roles = user.roles.map(x => x.role);
+        const userPayload: JwtPayload = {
+            id: user.id,
+            username: user.username,
+            roles: roles,
+            mail: user.mail,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            imgUrl: user.imgUrl,
+        };
+        return this.jwtService.sign(userPayload, { secret: Environment.access_token_secret, expiresIn: '1800s' });
+    }
+
+    generateRefreshToken(user: UserDto) {
+        if (!user)
+            return null;
+        let roles: string[] = [];
+        if (user.roles)
+            roles = user.roles.map(x => x.role);
+        const userPayload: JwtPayload = {
+            id: user.id,
+            username: user.username,
+            roles: roles,
+            mail: user.mail,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            imgUrl: user.imgUrl,
+        };
+        return this.jwtService.sign(userPayload, { secret: Environment.refresh_token_secret, expiresIn: '1y' });
+    }
+
+    validateToken(jwtToken: string) {
+        if (!jwtToken)
+            return;
+        return this.jwtService.verify(jwtToken, { secret: Environment.access_token_secret });
+    }
+
+    validateRefreshToken(jwtToken: string) {
+        if (!jwtToken)
+            return;
+        return this.jwtService.verify(jwtToken, { secret: Environment.refresh_token_secret });
+    }
+
 
 }

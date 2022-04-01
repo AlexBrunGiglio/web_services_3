@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { AuthController } from "../auth/auth.controller";
+import { AccessTokenController, AuthController, RefreshTokenController } from "../auth/auth.controller";
 import { AuthService } from "../auth/auth.service";
 import { RolesGuard } from "../auth/guards/roles.guard";
 import { DatabaseService } from "../database.service";
@@ -11,6 +11,8 @@ import { AppCommonModule } from "./common.module";
     ],
     controllers: [
         AuthController,
+        RefreshTokenController,
+        AccessTokenController,
     ],
     providers: [
         AuthService,

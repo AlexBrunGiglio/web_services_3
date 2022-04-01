@@ -33,9 +33,9 @@ import { UsersService } from "../modules/users/users.service";
         ]),
     ],
     controllers: [
-        ReferentialController,
-        UsersController,
-        UsersRolesController,
+        // ReferentialController,
+        // UsersController,
+        // UsersRolesController,
     ],
     providers: [
         ReferentialService,

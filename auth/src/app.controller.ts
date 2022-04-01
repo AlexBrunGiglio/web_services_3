@@ -4,8 +4,8 @@ import { Controller, Get } from '@nestjs/common';
 export class AppController {
   constructor() { }
 
-  @Get()
-  getHello(): string {
-    return "Hello World !";
-  }
+  // @Get()
+  // getHello(): string {
+  //   return "Hello World !";
+  // }
 }

@@ -1,0 +1,62 @@
+# compiled output
+/auth/dist
+/auth/node_modules
+/auth/uploads
+# env
+/auth/**/env.json
+
+# Logs
+/auth/logs
+/auth/*.log
+/auth/npm-debug.log*
+/auth/yarn-debug.log*
+/auth/yarn-error.log*
+/auth/lerna-debug.log*
+
+# OS
+/auth/.DS_Store
+
+# Tests
+/auth/coverage
+/auth/.nyc_output
+
+# IDEs and editors
+/auth/.idea
+/auth/.project
+/auth/.classpath
+/auth/.c9/
+/auth/*.launch
+/auth/.settings/
+/auth/*.sublime-workspace
+
+
+# compiled output
+/movies/dist
+/movies/node_modules
+/movies/uploads
+# env
+/movies/**/env.json
+
+# Logs
+/movies/logs
+/movies/*.log
+/movies/npm-debug.log*
+/movies/yarn-debug.log*
+/movies/yarn-error.log*
+/movies/lerna-debug.log*
+
+# OS
+/movies/.DS_Store
+
+# Tests
+/movies/coverage
+/movies/.nyc_output
+
+# IDEs and editors
+/movies/.idea
+/movies/.project
+/movies/.classpath
+/movies/.c9/
+/movies/*.launch
+/movies/.settings/
+/movies/*.sublime-workspace
