@@ -10,6 +10,12 @@
 
 ## 🛠️ Configuration et lancement du projet
 
+### Clonez le projet : 
+
+```bash
+$ git clone https://github.com/AlexBrunGiglio/web_services_3.git
+```
+
 ### Installation des dépendances 
 
 ```bash
