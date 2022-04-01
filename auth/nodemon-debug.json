@@ -1,0 +1,14 @@
+{
+    "watch": [
+        "./back"
+    ],
+    "ext": "ts",
+    "ignore": [
+        "./back/**/*.spec.ts",
+        "./back/**/*.log",
+        "./back/**/*.pdf",
+        "./back/**/*.jpg",
+        "./back/uploads/**"
+    ],
+    "exec": "node --inspect-brk -r ts-node/register back/main.ts"
+}

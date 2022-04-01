@@ -1,0 +1,14 @@
+{
+    "watch": [
+        "./"
+    ],
+    "ext": "ts",
+    "ignore": [
+        "./**/*.spec.ts",
+        "./**/*.log",
+        "./**/*.pdf",
+        "./**/*.jpg",
+        "./uploads/**"
+    ],
+    "exec": "ts-node --project tsconfig.json src/main.ts"
+}

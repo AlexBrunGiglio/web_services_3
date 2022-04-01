@@ -1,0 +1,6 @@
+{
+    "modelPropertyNaming": "original",
+    "ngVersion": "11",
+    "withInterfaces": false,
+    "useSingleRequestParameter": true
+}
